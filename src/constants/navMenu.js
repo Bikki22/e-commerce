@@ -1,17 +1,21 @@
-import { HOME_PAGE, ABOUT_PAGE, PRODUCT_PAGE, CONTACT_PAGE } from "./route";
+import {
+  HOME_PAGE,
+  ABOUT_PAGE,
+  PRODUCT_PAGE,
+  CONTACT_PAGE,
+  ORDER_PAGE,
+} from "./route";
 
 const navLinks = [
   {
     label: "Home",
     route: HOME_PAGE,
+    isAuth: false,
   },
   {
     label: "About",
     route: ABOUT_PAGE,
-  },
-  {
-    label: "Products",
-    route: PRODUCT_PAGE,
+    isAuth: false,
     submenu: [
       {
         route: "/men",
@@ -32,8 +36,19 @@ const navLinks = [
     ],
   },
   {
+    label: "Products",
+    route: PRODUCT_PAGE,
+    isAuth: false,
+  },
+  {
     label: "Contact",
     route: CONTACT_PAGE,
+    isAuth: false,
+  },
+  {
+    label: "Orders",
+    route: ORDER_PAGE,
+    isAuth: true,
   },
 ];
 
