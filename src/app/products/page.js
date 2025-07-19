@@ -6,13 +6,11 @@ const productPage = async () => {
   const response = await getProduct();
 
   const products = response?.data;
-  console.log(products);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 py-8">
+    <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 py-8 gap-10">
       {products?.map((product, index) => (
-        // <ProductCard key={index} product={product} />
-        <h1 key={index}>{product.name}</h1>
+        <ProductCard key={index} product={product} />
       ))}
     </div>
   );
