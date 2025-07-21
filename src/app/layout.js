@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import "./globals.css";
 import config from "@/config/config";
+import { ToastContainer } from "react-toastify";
 
 export const metadata = {
   title: config.appName,
@@ -13,6 +14,7 @@ export default function RootLayout({ children }) {
       <body>
         <Header />
         {children}
+        <ToastContainer />
       </body>
     </html>
   );

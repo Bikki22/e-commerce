@@ -6,7 +6,7 @@ import Image from "next/image";
 import profileImage from "@/assets/images/profile.jpg";
 
 export default function Header() {
-  const isAuth = true;
+  const isAuth = false;
 
   return (
     <header>
