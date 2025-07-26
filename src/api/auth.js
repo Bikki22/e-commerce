@@ -1,11 +1,19 @@
-import config from "@/config/config";
-import axios from "axios";
+import { apiClient } from "./apiClient";
 
 async function login({ email, password }) {
-  await axios.post(`${config.apiUrl}/api/auth/login`, {
+  return await apiClient.customFetch("/login", {
     email,
     password,
   });
 }
 
-export { login };
+async function register({ fullname, username, email, password }) {
+  return await apiClient.customFetch("/register", {
+    fullname,
+    username,
+    email,
+    password,
+  });
+}
+
+export { login, register };

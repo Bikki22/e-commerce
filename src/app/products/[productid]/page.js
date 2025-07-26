@@ -8,20 +8,16 @@ export const generateMetadata = async ({ params }) => {
 
   const response = await getProductById(productId);
 
-  const product = response?.data;
-
   return {
-    title: product.name,
-    keyword: `${product.brand},${product.category}`,
+    title: response.name,
+    keyword: `${response.brand},${response.category}`,
   };
 };
 
 const productPageById = async ({ params }) => {
   const productId = (await params).productid;
 
-  const response = await getProductById(productId);
-
-  const product = response?.data;
+  const product = await getProductById(productId);
 
   return (
     <div>
@@ -29,7 +25,7 @@ const productPageById = async ({ params }) => {
       <div className="grid grid-cols-1 md:grid-cols-2">
         <div className="w-full h-1/2">
           <Image
-            src={product.imageUrls[0]}
+            src={product?.imageUrls[0]}
             width={800}
             height={500}
             className="w-full h-[400px] object-contain "
@@ -37,7 +33,7 @@ const productPageById = async ({ params }) => {
           />
 
           <div className="flex px-5 my-5 gap-10 justify-start">
-            {product.imageUrls.map((url, index) => (
+            {product?.imageUrls?.map((url, index) => (
               <Image
                 src={url}
                 key={index}

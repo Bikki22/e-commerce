@@ -4,8 +4,12 @@ import config from "@/config/config";
 import { ToastContainer } from "react-toastify";
 
 export const metadata = {
-  title: config.appName,
-  description: "Online buying and selling application",
+  title: {
+    default: config.appName,
+    template: `${config.appName} | %s`,
+  },
+  description: "E-commerce app on next js",
+  keywords: "E-commerce, online shopping",
 };
 
 export default function RootLayout({ children }) {

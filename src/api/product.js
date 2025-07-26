@@ -1,12 +1,19 @@
-import config from "@/config/config";
-import axios from "axios";
+import { apiClient } from "./apiClient";
 
 async function getProduct() {
-  return await axios.get(`${config.apiUrl}/api/products`);
+  try {
+    return await apiClient.customFetch("/products");
+  } catch (error) {
+    console.log("failed to fetch products:", error);
+  }
 }
 
 async function getProductById(id) {
-  return await axios.get(`${config.apiUrl}/api/products/${id}`);
+  try {
+    return await apiClient.customFetch(`/products/${id}`);
+  } catch (error) {
+    console.log("failed to fetch products:", error);
+  }
 }
 
 export { getProduct, getProductById };
