@@ -4,9 +4,15 @@ import Navbar from "./Navbar";
 import navLinks from "@/constants/navMenu";
 import Image from "next/image";
 import profileImage from "@/assets/images/profile.jpg";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { logoutUser } from "@/redux/auth/authSlice";
+import { MdLogout } from "react-icons/md";
 
 export default function Header() {
-  const isAuth = false;
+  const { user } = useSelector((state) => state);
+
+  const dispatch = useDispatch();
 
   return (
     <header>
@@ -18,16 +24,24 @@ export default function Header() {
             </span>
           </Link>
           <div className="flex items-center lg:order-2">
-            {isAuth ? (
-              <button className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600">
-                <Image
-                  src={profileImage}
-                  width={32}
-                  height={32}
-                  className="w-8 h-8 rounded-full bg-cover"
-                  alt="profile image"
-                />
-              </button>
+            {user ? (
+              <div className="flex justify-around items-center gap-2">
+                <button className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600">
+                  <Image
+                    src={profileImage}
+                    width={32}
+                    height={32}
+                    className="w-8 h-8 rounded-full bg-cover"
+                    alt="profile image"
+                  />
+                </button>
+                <button
+                  onClick={() => dispatch(logoutUser())}
+                  className="bg-slate-700 text-white px-2 py-1 cursor-pointer"
+                >
+                  <MdLogout />
+                </button>
+              </div>
             ) : (
               <Link
                 href="/login"
@@ -39,7 +53,7 @@ export default function Header() {
           </div>
           <div className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1">
             {navLinks.map((menu, index) =>
-              isAuth || !menu.isAuth ? (
+              user || !menu.isAuth ? (
                 <Navbar key={index} menu={menu} isAuth={isAuth} />
               ) : null
             )}
