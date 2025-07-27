@@ -1,5 +1,4 @@
 "use client";
-import { login } from "@/api/auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -9,6 +8,7 @@ import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa6";
 import { useDispatch } from "react-redux";
 import { loginUser } from "@/redux/auth/authActions";
+import { useSelector } from "react-redux";
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -19,7 +19,7 @@ const LoginPage = () => {
     formState: { errors },
   } = useForm();
 
-  const { user, error } = useSelector((state) => state);
+  const { user, loading, error } = useSelector((state) => state.auth);
 
   const router = useRouter();
 

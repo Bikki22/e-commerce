@@ -3,6 +3,7 @@ import "./globals.css";
 import config from "@/config/config";
 import { ToastContainer } from "react-toastify";
 import AppProvider from "@/redux/provider";
+import MainLayout from "../layouts/mainLayout";
 
 export const metadata = {
   title: {
@@ -18,9 +19,11 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <AppProvider>
-          <Header />
-          {children}
-          <ToastContainer />
+          <MainLayout>
+            <Header />
+            {children}
+            <ToastContainer />
+          </MainLayout>
         </AppProvider>
       </body>
     </html>

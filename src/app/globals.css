@@ -3,8 +3,8 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --primary: #00ffff;
-  --secondary: #0f172a;
+  --primary: #016eb7;
+  --secondary: #303b45;
 }
 
 @theme inline {

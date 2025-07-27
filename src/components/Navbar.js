@@ -17,7 +17,7 @@ const Navbar = ({ menu }) => {
       <Link
         href={menu.route}
         className={` ${
-          isActive ? "text-red-500 underline " : ""
+          isActive ? "text-red-500 underline " : "dark:text-white"
         } block relative py-2 px-3 text-gray-900 rounded-sm border-b border-gray-100 hover:bg-black hover:text-white lg:border-0 `}
         onMouseEnter={() => {
           if (menu.submenu?.length > 0) setShowDropdown(true);

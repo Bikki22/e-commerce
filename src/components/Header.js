@@ -7,16 +7,21 @@ import profileImage from "@/assets/images/profile.jpg";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "@/redux/auth/authSlice";
-import { MdLogout } from "react-icons/md";
+import { MdLogout, MdOutlineDarkMode } from "react-icons/md";
+import { toggleTheme } from "@/redux/userPrefrence/userPrefrenceSlice";
+import { TbBulbFilled } from "react-icons/tb";
+import { LIGHT_THEME } from "@/constants/theme";
 
 export default function Header() {
-  const { user } = useSelector((state) => state);
+  const { user } = useSelector((state) => state.auth);
+
+  const { theme } = useSelector((state) => state.userPrefrence);
 
   const dispatch = useDispatch();
 
   return (
     <header>
-      <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800 shadow">
+      <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800 dark:text-white shadow">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
           <Link href="/" className="flex items-center">
             <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
@@ -24,6 +29,12 @@ export default function Header() {
             </span>
           </Link>
           <div className="flex items-center lg:order-2">
+            <button
+              className="px-2 py-1 rounded-md mr-2 cursor-pointer "
+              onClick={() => dispatch(toggleTheme())}
+            >
+              {theme == LIGHT_THEME ? <MdOutlineDarkMode /> : <TbBulbFilled />}
+            </button>
             {user ? (
               <div className="flex justify-around items-center gap-2">
                 <button className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600">
@@ -53,9 +64,7 @@ export default function Header() {
           </div>
           <div className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1">
             {navLinks.map((menu, index) =>
-              user || !menu.isAuth ? (
-                <Navbar key={index} menu={menu} isAuth={isAuth} />
-              ) : null
+              user || !menu.isAuth ? <Navbar key={index} menu={menu} /> : null
             )}
           </div>
         </div>
